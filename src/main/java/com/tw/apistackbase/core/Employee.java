@@ -13,6 +13,8 @@ public class Employee {
     private String name;
 
     private int age;
+    @Column(name = "company_id",nullable = true)
+    private Long companyId;
 
     public Employee(){}
 
@@ -46,4 +48,11 @@ public class Employee {
     }
 
 
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
 }
