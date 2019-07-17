@@ -1,9 +1,32 @@
 package com.tw.apistackbase.core;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table
 public class Company {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
+    @OneToOne(cascade = CascadeType.ALL)
+    private CompanyProfile profile;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="company_id")
+    private List<Employee> employees = new ArrayList<>();
+
+    public  Company(){}
+
+    public Company(String name, CompanyProfile profile,List<Employee> employees) {
+        this.name = name;
+        this.profile = profile;
+        this.employees = employees;
+    }
 
     public Long getId() {
         return id;
@@ -21,10 +44,19 @@ public class Company {
         this.name = name;
     }
 
-    public Company() {
+    public CompanyProfile getProfile() {
+        return profile;
     }
 
-    public Company(String name) {
-        this.name = name;
+    public void setProfile(CompanyProfile profile) {
+        this.profile = profile;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }
