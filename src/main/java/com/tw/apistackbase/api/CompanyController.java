@@ -20,6 +20,11 @@ public class CompanyController {
 
     @GetMapping(produces = {"application/json"})
     public List<Company> list() {
+        List<Company> companies = companyRepository.findAll();
+        System.out.println(companies.get(0));
+        System.out.println(companies.get(0).getEmployees().get(0));
+        System.out.println(companies.get(0).getEmployees().get(0).getCompany());
+        System.out.println(companies.get(0).getEmployees().get(0).getCompany().getEmployees().get(0));
         return companyRepository.findAll();
     }
     

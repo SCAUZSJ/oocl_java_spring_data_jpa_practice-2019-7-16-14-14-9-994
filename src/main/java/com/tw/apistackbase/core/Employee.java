@@ -1,5 +1,8 @@
 package com.tw.apistackbase.core;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +16,13 @@ public class Employee {
     private String name;
 
     private int age;
-    @Column(name = "company_id",nullable = true)
+//    @Column(name = "company_id",nullable = true)
+//    private Long companyId;
+    @ManyToOne(cascade =CascadeType.ALL)
+
+    private Company company;
+
+    @Column(name="company_id",insertable = false,updatable = false)
     private Long companyId;
 
     public Employee(){}
@@ -47,6 +56,13 @@ public class Employee {
         this.age = age;
     }
 
+    @JsonIgnore
+    public Company getCompany() {
+        return company;
+    }
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Long getCompanyId() {
         return companyId;
@@ -55,4 +71,13 @@ public class Employee {
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
+
+
+//    public Long getCompanyId() {
+//        return companyId;
+//    }
+//
+//    public void setCompanyId(Long companyId) {
+//        this.companyId = companyId;
+//    }
 }
